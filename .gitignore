@@ -1,4 +1,6 @@
 .venv/
+.conda-home/
+.miniforge3/
 __pycache__/
 *.py[cod]
 .pytest_cache/

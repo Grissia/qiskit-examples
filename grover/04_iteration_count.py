@@ -6,9 +6,8 @@ state is amplified, additional iterations rotate amplitude away from it.
 """
 
 from qiskit import QuantumCircuit
-from qiskit_aer import AerSimulator
-from qiskit.visualization import plot_histogram
-from matplotlib import pyplot as plt
+
+from qiskit_examples.simulation import create_simulator
 
 
 SHOTS = 10_000
@@ -72,7 +71,7 @@ def build_circuit(iterations: int) -> QuantumCircuit:
 
 
 def main() -> None:
-    sim = AerSimulator()
+    sim = create_simulator()
     all_counts = {}
 
     for iterations in range(1, 6):
@@ -84,9 +83,6 @@ def main() -> None:
         target_hits = counts.get(TARGET, 0)
         print(f"{iterations} iteration(s): {counts}")
         print(f"Target probability: {target_hits / SHOTS:.3f}\n")
-
-    plot_histogram(all_counts)
-    plt.show()
 
 
 if __name__ == "__main__":

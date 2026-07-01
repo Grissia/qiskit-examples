@@ -2,9 +2,8 @@
 """Five-qubit Grover search for one marked state: |01100>."""
 
 from qiskit import QuantumCircuit
-from qiskit_aer import AerSimulator
-from qiskit.visualization import plot_histogram
-from matplotlib import pyplot as plt
+
+from qiskit_examples.simulation import create_simulator
 
 
 SHOTS = 10_000
@@ -76,14 +75,12 @@ def build_circuit() -> QuantumCircuit:
 
 def main() -> None:
     qc = build_circuit()
-    sim = AerSimulator()
+    sim = create_simulator()
     result = sim.run(qc, shots=SHOTS).result()
     counts = result.get_counts()
 
     print("Counts:", counts)
     print(qc)
-    plot_histogram(counts)
-    plt.show()
 
 
 if __name__ == "__main__":

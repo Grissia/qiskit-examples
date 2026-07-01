@@ -2,7 +2,8 @@
 """Create a two-qubit superposition and compare state before/after measurement."""
 
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
-from qiskit_aer import AerSimulator
+
+from qiskit_examples.simulation import create_simulator
 
 
 def build_circuit() -> QuantumCircuit:
@@ -19,7 +20,7 @@ def build_circuit() -> QuantumCircuit:
 
 def main() -> None:
     circuit = build_circuit()
-    simulator = AerSimulator()
+    simulator = create_simulator()
     result = simulator.run(circuit, shots=10_000).result()
     data = result.data()
 

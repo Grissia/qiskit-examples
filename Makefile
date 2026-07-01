@@ -1,11 +1,22 @@
 PYTHON ?= python
-PIP ?= python -m pip
+PIP ?= $(PYTHON) -m pip
 ENV = PYTHONPATH=.
 
-.PHONY: install run-superposition run-half-adder run-grover-two-qubit run-grover-five-qubit run-grover-constraints run-grover-iterations run-grover-multiple test clean
+.PHONY: install install-gpu doctor check-gpu run-superposition run-half-adder run-grover-two-qubit run-grover-five-qubit run-grover-constraints run-grover-iterations run-grover-multiple test clean
 
 install:
 	$(PIP) install -r requirements.txt
+
+install-gpu:
+	$(ENV) $(PYTHON) -m qiskit_examples.install_checks gpu
+	$(PIP) uninstall -y qiskit qiskit-aer qiskit-aer-gpu qiskit-aer-gpu-cu11 qiskit-terra
+	$(PIP) install --no-cache-dir -r requirements-gpu.txt
+
+doctor:
+	$(ENV) $(PYTHON) -m qiskit_examples.doctor
+
+check-gpu:
+	$(ENV) $(PYTHON) -m qiskit_examples.check_gpu
 
 run-superposition:
 	$(ENV) $(PYTHON) examples/01_superposition_measurement.py

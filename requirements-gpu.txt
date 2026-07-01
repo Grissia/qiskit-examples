@@ -1,0 +1,3 @@
+qiskit==1.4.5
+qiskit-aer-gpu==0.15.1
+pytest

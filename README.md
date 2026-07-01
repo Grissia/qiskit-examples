@@ -12,6 +12,54 @@ source .venv/bin/activate
 make install
 ```
 
+## GPU Mode
+
+Use the GPU environment helper before running GPU examples:
+
+```bash
+source env_qiskit_gpu.sh
+make check-gpu
+make run-grover-constraints
+```
+
+`make check-gpu` should end with:
+
+```text
+OK: Qiskit Aer GPU backend is available.
+```
+
+If you need to create the GPU environment from scratch, use Python 3.11 and
+install the GPU requirements:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+make install-gpu
+source env_qiskit_gpu.sh
+make check-gpu
+```
+
+On an HPC environment with modules, load Python and CUDA first:
+
+```bash
+module load cuda/12.8
+module load python/3.11
+python -m venv .venv
+source .venv/bin/activate
+make install-gpu
+source env_qiskit_gpu.sh
+make check-gpu
+make run-grover-constraints
+```
+
+To run the test suite on CPU while the GPU environment is active:
+
+```bash
+QISKIT_AER_DEVICE=CPU make test
+```
+
+See `docs/gpu-development.md` for version pins, WSL notes, and troubleshooting.
+
 ## Lessons
 
 | Lesson | Script | Topic |
